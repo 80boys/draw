@@ -72,13 +72,23 @@ function Panel(){
             <div className='panel-background' >
                 <canvas ref={canvasRef}
                     onMouseDown={startMouseDown}
+                    onTouchStart={startMouseDown}
                     onMouseUp={startMouseUp}
+                    onTouchEnd={startMouseUp}
                     onMouseLeave={startMouseUp}
+                    onTouchCancel={startMouseUp}
                     onMouseMove={(e)=>{
                         if ( isMouseDown === true ) {
                             sendData( unpack( e.pageX, e.pageY ) )
                         }
-                    }}  width={win.width} height={win.height}  >
+                    }}  
+                    onTouchMove={(e)=>{
+                        e.preventDefault(); 
+                        if ( isMouseDown === true ) {
+                            sendData( unpack( e.touches[0].clientX, e.touches[0].clientY ) )
+                        }
+                    }} 
+                    width={win.width} height={win.height}  >
                 </canvas>
                 <Toolbar updateColor={updateColor} drawTool={drawTool} win={win} />
             </div>

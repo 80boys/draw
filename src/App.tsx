@@ -1,4 +1,3 @@
-import './App.css';
 import './compoments/panel/panel'
 import Panel from './compoments/panel/panel';
 
